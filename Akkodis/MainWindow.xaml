@@ -1,0 +1,68 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Akkodis"
+        xmlns:Data="clr-namespace:Akkodis.Data" x:Class="Akkodis.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="ClientViewSource"/>
+        <CollectionViewSource x:Key="CarViewSource"/>
+    </Window.Resources>
+    <Grid>
+        <TextBox HorizontalAlignment="Left" BorderBrush="{x:Null}">Hover me, I'm a tooltip!
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>To insert or update - double click any field and start typing, no empty cells!</TextBlock>
+                        <TextBlock>To delete - select any row and press the delete button on your keyboard</TextBlock>
+                        <TextBlock>After you're done, click the 'Save' button</TextBlock>
+                        <TextBlock>To attribute car to a client, simply select them both in their grids and press the button</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+        <DataGrid x:Name="clientDataGrid" AutoGenerateColumns="False" 
+                  EnableRowVirtualization="True" 
+                  ItemsSource="{Binding Source={StaticResource ClientViewSource}}" 
+                  Margin="13,23,43,279" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="clientDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}"
+                                    Header="Client Id" Width="SizeToHeader"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" 
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" 
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding Email}" Header="Email" 
+                                    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="carsDataGrid" AutoGenerateColumns="False" 
+                  EnableRowVirtualization="True" 
+                  ItemsSource="{Binding Source={StaticResource CarViewSource}}" 
+                  Margin="13,179,43,123" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="carsDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}"
+                                    Header="Car Id" Width="SizeToHeader"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Make}" Header="Make" 
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding Model}" Header="Model" 
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding LicensePlate}" Header="LicensePlate" 
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding ClientId}"
+                                    Header="Client Id" Width="SizeToHeader"
+                                    IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Save" HorizontalAlignment="Center" Margin="0,340,150,0" 
+                Click="Button_Click" Height="20" Width="123"/>
+        <Button Name="AttrCarButton" Content="Attribute car to client" HorizontalAlignment="Center" Margin="150,340,0,0" 
+                Height="20" Width="150" IsEnabled="False" Click="AttrCarButton_Click"/>
+    </Grid>
+</Window>
