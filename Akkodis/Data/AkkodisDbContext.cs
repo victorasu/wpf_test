@@ -10,7 +10,7 @@ namespace Akkodis.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=C:\\Users\\R1kK\\source\\repos\\victorasu\\wpf_test\\Akkodis\\akkodis.db");
+            optionsBuilder.UseSqlite("Data Source=C:\\Users\\R1kK\\source\\repos\\victorasu\\wpf_test\\Akkodis\\akkodis.db"); //change
         }
     }
 }
